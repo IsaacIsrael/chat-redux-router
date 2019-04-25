@@ -1,0 +1,28 @@
+.channels-container {
+  padding: $padding;
+  height: 100%;
+  background: $light-gray;
+  box-sizing: border-box;
+
+  &>span {
+    font-weight: 900;
+  }
+
+  & > ul {
+    list-style: none;
+    padding:0;
+    padding-top: 2em;
+
+  }
+  li {
+    margin: ($padding/2) 0;
+    font-size: $font-size;
+    color: $light-black;
+    cursor: pointer;
+  }
+
+  li.active{
+    font-weight: 600;
+    color: $black;
+  }
+}

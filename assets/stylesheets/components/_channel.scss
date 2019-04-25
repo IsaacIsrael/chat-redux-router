@@ -1,0 +1,10 @@
+.channel-container{
+  .channel-title {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    border-bottom: $border;
+    font-weight: 600;
+  }
+}

@@ -1,0 +1,16 @@
+.app {
+  display:flex;
+  height: 100vh;
+
+  .logo-container{
+    flex-basis: 60px;
+  }
+
+  .channels-container{
+   flex-basis: 220px;
+  }
+
+  .channel-container {
+    flex-grow: 1;
+  }
+}

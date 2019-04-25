@@ -1,0 +1,15 @@
+$logo-size: 40px;
+
+.logo-container{
+  background: $gray;
+  box-sizing: border-box;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+
+  .logo {
+    margin-top: ($padding/2);
+    width: $logo-size;
+    height: $logo-size;
+  }
+}
