@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 
 import MessageList from '../containers/message_list';
 import MessageForm from '../containers/message_form';
@@ -9,7 +8,7 @@ class ChanelPanel extends Component {
   renderHeader = () => {
     return (
       <div className="channel-title">
-        <span>Channel #{this.props.channel}</span>
+        <span>Channel #{this.props.channelFromParams}</span>
       </div>
     );
   }
@@ -17,18 +16,12 @@ class ChanelPanel extends Component {
     return (
       <div className="channel-container">
         {this.renderHeader()}
-        <MessageList />
-        <MessageForm />
+        <MessageList channelFromParams={this.props.channelFromParams} />
+        <MessageForm channelFromParams={this.props.channelFromParams} />
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    channel: state.selectedChannel
-  };
-}
 
-
-export default connect(mapStateToProps)(ChanelPanel);
+export default ChanelPanel;

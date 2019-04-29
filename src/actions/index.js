@@ -6,14 +6,12 @@ export const CREATE_MESSAGE = 'CREATE_MESSAGE';
 export const SELECT_CHANEL = 'SELECT_CHANEL';
 
 export function fecthMessages(channel) {
-  return fetch(`${apiURL}/${channel}/messages`)
-    .then(response => response.json())
-    .then((data) => {
-      return {
-        type: FECTH_MESSAGES,
-        payload: data.messages
-      };
-    });
+  const promise = fetch(`${apiURL}/${channel}/messages`)
+    .then(response => response.json());
+  return {
+    type: FECTH_MESSAGES,
+    payload: promise
+  };
 }
 
 export function createMessage(channel, author, content) {
@@ -33,9 +31,3 @@ export function createMessage(channel, author, content) {
   };
 }
 
-export function selectChannel(channel) {
-  return {
-    type: SELECT_CHANEL,
-    payload: channel
-  };
-}

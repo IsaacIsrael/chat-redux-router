@@ -12,7 +12,7 @@ class MessageList extends Component {
   }
 
   componentDidMount() {
-    this.refresher = setInterval(this.fetchMessages, 5000);
+    // this.refresher = setInterval(this.fetchMessages, 5000);
   }
 
   componentDidUpdate() {
@@ -20,22 +20,22 @@ class MessageList extends Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.refresher);
+    // clearInterval(this.refresher);
   }
 
   fetchMessages = () => {
-    this.props.fecthMessages(this.props.channel);
+    this.props.fecthMessages(this.props.channelFromParams);
   }
 
 
-  renderMessages = () => this.props.messages.map(message =>
+  renderMessages = message => (
     <Message message={message} key={message.id} />
   );
 
   render() {
     return (
       <div className="message-list" ref={(list) => { this.list = list; }}>
-        {this.renderMessages()}
+        {this.props.messages.map(this.renderMessages)}
       </div>
     );
   }
@@ -43,8 +43,7 @@ class MessageList extends Component {
 
 function mapStateToProps(state) {
   return {
-    messages: state.messages,
-    channel: state.selectedChannel
+    messages: state.messages
   };
 }
 

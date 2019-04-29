@@ -24,15 +24,19 @@ class MessageForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { props } = this;
-    props.createMessage(props.channel, props.user, this.state.value);
+    props.createMessage(props.channelFromParams, props.user, this.state.value);
     this.setState({ value: '' });
   }
 
   render() {
     return (
       <form className="channel-editor" onSubmit={this.handleSubmit}>
-        <input type="text" value={this.state.value} onChange={this.handleChange}
-          ref={(input) => { this.input = input; }}/>
+        <input
+          type="text"
+          value={this.state.value}
+          onChange={this.handleChange}
+          ref={(input) => { this.input = input; }}
+        />
         <button type="submit">Send</button>
       </form>
     );
@@ -41,7 +45,6 @@ class MessageForm extends Component {
 
 function mapStateToProps (state) {
   return {
-    channel: state.selectedChannel,
     user: state.currentUser
   };
 }

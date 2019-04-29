@@ -1,37 +1,37 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 
-import { selectChannel, fecthMessages } from '../actions';
+import { fecthMessages } from '../actions';
 
 
 class ChanelList extends Component {
   componentWillReceiveProps(nextProps) {
-    if (this.props.selectedChannel !== nextProps.selectedChannel) {
-      this.props.fecthMessages(nextProps.selectedChannel);
+    if (this.props.channelFromParams !== nextProps.channelFromParams) {
+      this.props.fecthMessages(nextProps.channelFromParams);
     }
   }
 
-  handleClick = (channel) => {
-    if (this.props.selectedChannel !== channel) {
-      this.props.selectChannel(channel);
-    }
+  classChanel = (channel) => {
+    return this.props.channelFromParams === channel ? 'active' : null;
   }
 
-  renderChanel = () => this.props.channels.map(channel => (
-    <li className={this.props.selectedChannel === channel ? 'active' : null} key={channel}
-      onClick={() => this.handleClick(channel)} role="presentation">
-      #{channel}
+  renderChanel = channel => (
+    <li key={channel} className={this.classChanel(channel)} role="presentation" >
+      <Link to={`/${channel}`}>
+        #{channel}
+      </Link>
     </li>
-  ));
+  );
 
   render() {
     return (
       <div className="channels-container">
         <span>Redux Chat</span>
         <ul>
-          {this.renderChanel()}
+          {this.props.channels.map(this.renderChanel)}
         </ul>
       </div>
     );
@@ -41,14 +41,13 @@ class ChanelList extends Component {
 
 function mapStateToProps(state) {
   return {
-    channels: state.channels,
-    selectedChannel: state.selectedChannel
+    channels: state.channels
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { selectChannel, fecthMessages },
+    { fecthMessages },
     dispatch
   );
 }
